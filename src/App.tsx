@@ -3,6 +3,8 @@ import Card, {CardVariant} from "./components/Card";
 import UserList from "./components/UserList";
 import {IUser} from "./types/type";
 import axios from "axios";
+import UniversalList from "./components/UniversalList";
+import UserItem from "./components/UserItem";
 
 // HARDCORE MOCK
 // const users: IUser[] = [
@@ -33,7 +35,10 @@ const App = () => {
          <p>Абзац</p>
        </Card>
 
+      <h2>USER_LIST:</h2>
        <UserList users={users} />
+      <h2>UNIVERSAL_LIST:</h2>
+       <UniversalList items={users} renderItem={(user: IUser) => <UserItem user={user} key={user.id} />} />
     </div>
   );
 };
