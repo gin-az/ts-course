@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {IUser} from "../types/type";
+import {IUser} from "../types/types";
 
 interface IUserItemProps {
   user: IUser;
