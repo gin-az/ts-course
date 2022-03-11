@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Card, {CardVariant} from "./components/Card";
 import UserList from "./components/UserList";
-import {IUser} from "./types/type";
+import {ITodo, IUser} from "./types/types";
 import axios from "axios";
+import UniversalList from "./components/UniversalList";
+import UserItem from "./components/UserItem";
+import TodoItem from "./components/TodoItem";
 
 // HARDCORE MOCK
 // const users: IUser[] = [
@@ -12,15 +15,26 @@ import axios from "axios";
 
 const App = () => {
   const [users, setUsers] = useState<IUser[]>([])
+  const [todos, setTodos] = useState<ITodo[]>([])
 
   useEffect(() => {
     fetchUsers();
+    fetchTodos();
   }, []);
 
   async function fetchUsers() {
     try {
       const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
       setUsers(response.data);
+    } catch (e) {
+      alert(e)
+    }
+  }
+
+  async function fetchTodos() {
+    try {
+      const response = await axios.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos?_limit=15');
+      setTodos(response.data);
     } catch (e) {
       alert(e)
     }
@@ -33,7 +47,13 @@ const App = () => {
          <p>Абзац</p>
        </Card>
 
+      <h2>USER_LIST:</h2>
        <UserList users={users} />
+      <h2>UNIVERSAL_LIST_USER:</h2>
+       <UniversalList items={users} renderItem={(user: IUser) => <UserItem user={user} key={user.id} />} />
+
+      <h2>UNIVERSAL_LIST_TODOS:</h2>
+        <UniversalList items={todos} renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />} />
     </div>
   );
 };

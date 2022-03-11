@@ -11,5 +11,10 @@ export interface IUser {
   email: string;
   // Для вложенных объектов создается отдельный интерфейс
   address: IAddress;
+}
 
+export interface ITodo {
+  id: number;
+  title: string;
+  completed: boolean;
 }
