@@ -6,6 +6,7 @@ import axios from "axios";
 import UniversalList from "./components/UniversalList";
 import UserItem from "./components/UserItem";
 import TodoItem from "./components/TodoItem";
+import EventsExample from "./components/EventsExample";
 
 // HARDCORE MOCK
 // const users: IUser[] = [
@@ -54,6 +55,8 @@ const App = () => {
 
       <h2>UNIVERSAL_LIST_TODOS:</h2>
         <UniversalList items={todos} renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />} />
+      <h2>Event_types</h2>
+      <EventsExample />
     </div>
   );
 };
