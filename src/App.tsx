@@ -7,6 +7,11 @@ import UniversalList from "./components/UniversalList";
 import UserItem from "./components/UserItem";
 import TodoItem from "./components/TodoItem";
 import EventsExample from "./components/EventsExample";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import UsersPage from "./components/Pages/UsersPage";
+import TodosPage from "./components/Pages/TodosPage";
+import Root from "./components/Routers/Root";
+import Header from "./components/Header";
 
 // HARDCORE MOCK
 // const users: IUser[] = [
@@ -15,47 +20,19 @@ import EventsExample from "./components/EventsExample";
 // ]
 
 const App = () => {
-  const [users, setUsers] = useState<IUser[]>([])
-  const [todos, setTodos] = useState<ITodo[]>([])
-
-  useEffect(() => {
-    fetchUsers();
-    fetchTodos();
-  }, []);
-
-  async function fetchUsers() {
-    try {
-      const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
-      setUsers(response.data);
-    } catch (e) {
-      alert(e)
-    }
-  }
-
-  async function fetchTodos() {
-    try {
-      const response = await axios.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos?_limit=15');
-      setTodos(response.data);
-    } catch (e) {
-      alert(e)
-    }
-  }
 
   return (
+
     <div>
+      <Header />
+      <Root />
+      <hr />
        <Card onClick={(num) => console.log('click', num)} height='250px' width='250px' variant={CardVariant.primary}>
          <button>Кнопка</button>
          <p>Абзац</p>
        </Card>
 
-      <h2>USER_LIST:</h2>
-       <UserList users={users} />
-      <h2>UNIVERSAL_LIST_USER:</h2>
-       <UniversalList items={users} renderItem={(user: IUser) => <UserItem user={user} key={user.id} />} />
-
-      <h2>UNIVERSAL_LIST_TODOS:</h2>
-        <UniversalList items={todos} renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />} />
-      <h2>Event_types</h2>
+     <h2>Event_types</h2>
       <EventsExample />
     </div>
   );
